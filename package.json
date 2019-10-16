@@ -24,6 +24,7 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.1",
+    "redux-thunk": "^2.3.0",
     "rupiah-format": "^1.0.0"
   },
   "devDependencies": {

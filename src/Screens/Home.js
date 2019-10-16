@@ -37,7 +37,7 @@ import {
   ListItem,
 } from 'native-base';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [Data, setData] = useState([]);
   const Product = useSelector(state => state.Home);
   const dispatch = useDispatch();
@@ -46,16 +46,17 @@ const Home = () => {
     const output = await Axios.get('http://192.168.0.106:3333/api/v1/products');
     // const output = await dispatch(getHome());
     setData(output.data.data);
-    // console.log('ini' + output);
+    console.log('output getdata' + output);
   }
 
   useEffect(() => {
     getData();
-    console.log('tes');
+    console.log('ini useEffect' + getData());
   }, []);
 
   return (
     <>
+      <Header androidStatusBarColor={'#ef5777'} style={{display: 'none'}} />
       <View style={styles.Parent}>
         <View style={{flex: 1}}>
           <Text style={styles.Title}>Rungal App</Text>
@@ -90,7 +91,7 @@ const Home = () => {
                     description={item.description}
                   />
                 )}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
               />
               {/*{Data.map(item => {
               return (
@@ -118,7 +119,7 @@ const Home = () => {
           {/*<Button full>
             <Icon name="ios-trending-up" style={styles.IconColor} />
           </Button>*/}
-          <Button full>
+          <Button full onPress={() => navigation.navigate('Manage')}>
             <Icon name="ios-options" style={styles.IconColor} />
           </Button>
         </FooterTab>
@@ -209,7 +210,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignSelf: 'center',
     borderTopLeftRadius: 15,
-    borderBottomLeftRadius: 15,
   },
   CardProduct: {
     alignSelf: 'center',
