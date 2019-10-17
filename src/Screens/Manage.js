@@ -2,46 +2,40 @@ import React from 'react';
 
 import {
   StyleSheet,
-  Image,
-  SafeAreaView,
   View,
-  FlatList,
   AsyncStorage,
+  Alert
 } from 'react-native';
 
-import { ScrollView } from 'react-native-gesture-handler';
-
 import {
-  Badge,
-  Card,
-  CardItem,
-  Item,
-  Input,
-  Container,
   Header,
   Title,
-  Content,
-  Footer,
-  FooterTab,
   Button,
   Left,
   Right,
   Body,
   Icon,
   Text,
-  Tabs,
-  Tab,
-  TabHeading,
-  Segment,
   List,
   ListItem,
-  ToastAndroid
 } from 'native-base';
 
 const Manage = ({ navigation }) => {
-  async function Logout() {
-    await AsyncStorage.removeItem('keyToken');
-    return navigation.navigate('Login');
+  function Logout() {
+    Alert.alert(
+      'Logout',
+      'Are you sure want to logout?',
+      [{
+        text: 'Cancel', style: 'cancel',
+      },
+      {
+        text: 'OK', onPress: () => result()
+      }], { cancelable: false }
+    )
+    async function result() {
+      await AsyncStorage.removeItem('keyToken');
+      return navigation.navigate('Login');
+    }
   }
 
   return (
@@ -86,42 +80,68 @@ const Manage = ({ navigation }) => {
               <Body>
                 <Text>Edit Product</Text>
               </Body>
+              <Right>
+                <Icon name="ios-arrow-forward" />
+              </Right>
             </ListItem>
-            <ListItem icon>
+            <ListItem icon onPress={() => navigation.navigate('DeleteProduct')}>
               <Left>
-                <Button style={{ backgroundColor: '#ff3f34' }}>
+                <Button
+                  style={{ backgroundColor: '#ff3f34' }}>
                   <Icon active name="ios-trash" />
                 </Button>
               </Left>
               <Body>
                 <Text>Delete Product</Text>
               </Body>
+              <Right>
+                <Icon name="ios-arrow-forward" />
+              </Right>
             </ListItem>
             <ListItem itemDivider>
               <Text>Revenue</Text>
             </ListItem>
-            <ListItem icon>
+            <ListItem icon icon onPress={() => navigation.navigate('Revenue')}>
               <Left>
                 <Button
-                  style={{ backgroundColor: '#0be881' }}
-                  onPress={() => navigation.navigate('AddProduct')}>
+                  style={{ backgroundColor: '#4bcffa' }}>
                   <Icon active name="ios-trending-up" />
                 </Button>
               </Left>
               <Body>
                 <Text>Chart Revenue</Text>
               </Body>
+              <Right>
+                <Icon name="ios-arrow-forward" />
+              </Right>
+            </ListItem>
+            <ListItem icon>
+              <Left>
+                <Button
+                  style={{ backgroundColor: '#808e9b' }}>
+                  <Icon active name="ios-folder-open" />
+                </Button>
+              </Left>
+              <Body>
+                <Text>History Order</Text>
+              </Body>
+              <Right>
+                <Icon name="ios-arrow-forward" />
+              </Right>
             </ListItem>
             <ListItem itemDivider />
             <ListItem icon onPress={() => Logout()}>
               <Left>
-                <Button style={{ backgroundColor: '#ff3f34' }}>
+                <Button style={{ backgroundColor: '#1e272e' }}>
                   <Icon active name="ios-log-out" />
                 </Button>
               </Left>
               <Body>
                 <Text>Logout</Text>
               </Body>
+              <Right>
+                <Icon name="ios-arrow-forward" />
+              </Right>
             </ListItem>
           </List>
         </View>

@@ -1,49 +1,29 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {getHome} from '../Public/Redux/Actions/Home';
+import React from 'react';
 
-import Axios from 'axios';
-import Rupiah from 'rupiah-format';
+import { StyleSheet, View } from 'react-native';
 
-import Login from './Login';
-
-import {StyleSheet, Image, SafeAreaView, View, FlatList} from 'react-native';
-
-import {ScrollView} from 'react-native-gesture-handler';
+import aqua from '../Assets/Img/aqua.jpg'
 
 import {
-  Badge,
-  Card,
-  CardItem,
-  Item,
-  Input,
-  Container,
   Header,
   Title,
-  Content,
-  Footer,
-  FooterTab,
   Button,
   Left,
-  Right,
   Body,
   Icon,
   Text,
-  Tabs,
-  Tab,
-  TabHeading,
-  Segment,
   List,
   ListItem,
   Thumbnail,
+  Content,
 } from 'native-base';
 
-const Cart = ({navigation}) => {
+const Cart = ({ navigation }) => {
   return (
     <>
       <Header
         androidStatusBarColor={'#ef5777'}
-        style={{backgroundColor: '#ef5777'}}>
+        style={{ backgroundColor: '#ef5777' }}>
         <Left>
           <Button transparent onPress={() => navigation.goBack()}>
             <Icon name="ios-arrow-back" />
@@ -53,29 +33,79 @@ const Cart = ({navigation}) => {
           <Title>Checkout Products</Title>
         </Body>
       </Header>
-      <View>
-        <List>
-          <ListItem thumbnail>
-            <Left>
-              <Thumbnail square source={{uri: 'Image URL'}} />
-            </Left>
-            <Body>
-              <Text>Sankhadeep</Text>
-              <Text note numberOfLines={1}>
-                Its time to build a difference . .
-              </Text>
-            </Body>
-            <Right>
-              <Button transparent>
-                <Text>View</Text>
-              </Button>
-            </Right>
-          </ListItem>
-          <Button>
-            <Text>Checkout</Text>
-          </Button>
-        </List>
+      <Content>
+        <View style={{ flex: 1 }}>
+          <List>
+            <ListItem thumbnail>
+              <Left>
+                <Thumbnail square source={aqua} />
+              </Left>
+              <Body style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 3 }}>
+                  <Text>Aqua</Text>
+                  <Text note numberOfLines={1}>
+                    Rp. 3000
+                  </Text>
+                </View>
+                <View style={{ flex: 4, flexDirection: 'row' }}>
+                  <Button style={{
+                    borderTopLeftRadius: 5,
+                    borderBottomLeftRadius: 5,
+                    justifyContent: 'center',
+                    width: 40,
+                    backgroundColor: '#05c46b'
+                  }}>
+                    <Text>-</Text>
+                  </Button>
+                  <Button disabled style={{
+                    borderRadius: 0,
+                    justifyContent: 'center',
+                    width: 50,
+                    backgroundColor: '#05c46b'
+                  }}>
+                    <Text style={{ fontSize: 12 }}>10</Text>
+                  </Button>
+                  <Button style={{
+                    borderTopRightRadius: 5,
+                    borderBottomRightRadius: 5,
+                    justifyContent: 'center',
+                    width: 40,
+                    backgroundColor: '#05c46b'
+                  }}>
+                    <Text>+</Text>
+                  </Button>
+                </View>
+              </Body>
+            </ListItem>
+          </List>
+        </View>
+      </Content>
+      <View style={{ alignItems: 'center', alignSelf: 'center', borderColor: 'red' }}>
+        <Text>Total Price: Rp. 50.000</Text>
+        <Button style={{
+          alignSelf: 'center',
+          borderRadius: 10,
+          justifyContent: 'center',
+          backgroundColor: '#0fbcf9',
+          width: 300,
+          marginTop: 10,
+          marginBottom: 5,
+        }}>
+          <Text>Checkout</Text>
+        </Button>
+        <Button style={{
+          alignSelf: 'center',
+          borderRadius: 10,
+          justifyContent: 'center',
+          backgroundColor: '#ef5777',
+          width: 290,
+          marginBottom: 20
+        }}>
+          <Text>Cancel</Text>
+        </Button>
       </View>
+
+
     </>
   );
 };
@@ -84,62 +114,6 @@ const styles = StyleSheet.create({
   Parent: {
     flex: 1,
     backgroundColor: '#ef5777',
-  },
-
-  Title: {
-    marginTop: 20,
-    alignSelf: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-
-  Body: {
-    flex: 2,
-    borderTopLeftRadius: 20,
-    marginTop: 15,
-    backgroundColor: 'white',
-  },
-
-  ColProduct: {
-    marginTop: 15,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 5,
-    // justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-
-  ItemSearch: {
-    width: '80%',
-    alignSelf: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-    backgroundColor: 'white',
-  },
-  ImageProduct: {
-    height: 170,
-    width: '100%',
-    alignSelf: 'center',
-    borderTopLeftRadius: 15,
-  },
-  CardProduct: {
-    alignSelf: 'center',
-    width: 350,
-    borderColor: 'white',
-    elevation: 0,
-    shadowOpacity: 0,
-    shadowOffset: {
-      height: 0,
-      width: 0,
-    },
-  },
-  BottomNav: {
-    backgroundColor: '#ef5777',
-  },
-  IconColor: {
-    color: 'white',
   },
 });
 

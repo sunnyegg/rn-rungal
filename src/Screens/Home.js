@@ -22,27 +22,30 @@ import {
   Icon,
   Text,
   List,
+  Segment,
 } from 'native-base';
 
 const Home = ({ navigation }) => {
   const [Data, setData] = useState([]);
+  const [Search, setSearch] = useState('')
   const [Cart, setCart] = useState([]);
 
   const Product = useSelector(state => state.Home.Home);
   const dispatch = useDispatch();
 
   async function getData() {
-    const output = await dispatch(getHome());
+    const output = await dispatch(getHome({ search: Search }));
+
     setData(output.value.data.data);
   }
 
-  function addCart() {
-    const { id, name, price, image, quantity } = data;
-  }
+  // function addCart() {
+  //   const { id, name, price, image, quantity } = data;
+  // }
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [Search]);
 
   return (
     <>
@@ -53,13 +56,18 @@ const Home = ({ navigation }) => {
 
           <Item rounded style={styles.ItemSearch}>
             <Icon name="ios-search" style={{ margin: 5 }} />
-            <Input placeholder="Search" />
+            <Input placeholder="Search" onChange={value => setSearch(value)} onChangeText={text => setSearch(text)} value={Search} />
           </Item>
         </View>
 
         <View style={styles.Body}>
+          <Segment style={{ backgroundColor: 'transparent' }}>
+            <Button first style={{ backgroundColor: 'red' }}><Text>Name</Text></Button>
+            <Button last style={{ backgroundColor: 'blue' }}><Text>Price</Text></Button>
+          </Segment>
           <View style={styles.ColProduct}>
-            <List style={{ flex: 1 }}>
+            <List
+              style={{ flex: 1, marginBottom: 40 }}>
               <FlatList
                 data={Data}
                 renderItem={({ item }) => (
@@ -72,21 +80,13 @@ const Home = ({ navigation }) => {
                 )}
                 keyExtractor={item => item.id.toString()}
               />
-              {/*{Data.map(item => {
-              return (
-                <CardProduct
-                  name={item.name}
-                  image={'http://192.168.0.106:3333/' + item.image}
-                />
-              );
-            })}*/}
             </List>
           </View>
         </View>
       </View>
       <Footer>
         <FooterTab style={styles.BottomNav}>
-          <Button full>
+          <Button full onPress={() => getData()}>
             <Icon name="home" style={styles.IconColor} />
           </Button>
           <Button
@@ -173,7 +173,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
     marginBottom: 5,
-    // justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
@@ -186,7 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   ImageProduct: {
-    height: 170,
+    height: 100,
     width: '100%',
     alignSelf: 'center',
     borderTopLeftRadius: 15,
