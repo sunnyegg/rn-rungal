@@ -1,15 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {getHome} from '../Public/Redux/Actions/Home';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getHome } from '../Public/Redux/Actions/Home';
 
-import Axios from 'axios';
 import Rupiah from 'rupiah-format';
 
-import Login from './Login';
 
-import {StyleSheet, Image, SafeAreaView, View, FlatList} from 'react-native';
+import { StyleSheet, Image, View, FlatList } from 'react-native';
 
-import {ScrollView} from 'react-native-gesture-handler';
 
 import {
   Badge,
@@ -17,73 +14,55 @@ import {
   CardItem,
   Item,
   Input,
-  Container,
   Header,
-  Title,
-  Content,
   Footer,
   FooterTab,
   Button,
-  Left,
-  Right,
   Body,
   Icon,
   Text,
-  Tabs,
-  Tab,
-  TabHeading,
-  Segment,
   List,
-  ListItem,
 } from 'native-base';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const [Data, setData] = useState([]);
-  const Product = useSelector(state => state.Home);
+  const [Cart, setCart] = useState([]);
+
+  const Product = useSelector(state => state.Home.Home);
   const dispatch = useDispatch();
 
   async function getData() {
-    const output = await Axios.get('http://192.168.0.106:3333/api/v1/products');
-    // const output = await dispatch(getHome());
-    setData(output.data.data);
-    console.log('output getdata' + output);
+    const output = await dispatch(getHome());
+    setData(output.value.data.data);
+  }
+
+  function addCart() {
+    const { id, name, price, image, quantity } = data;
   }
 
   useEffect(() => {
     getData();
-    console.log('ini useEffect' + getData());
   }, []);
 
   return (
     <>
-      <Header androidStatusBarColor={'#ef5777'} style={{display: 'none'}} />
+      <Header androidStatusBarColor={'#ef5777'} style={{ display: 'none' }} />
       <View style={styles.Parent}>
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
           <Text style={styles.Title}>Rungal App</Text>
 
           <Item rounded style={styles.ItemSearch}>
-            <Icon name="ios-search" style={{margin: 5}} />
+            <Icon name="ios-search" style={{ margin: 5 }} />
             <Input placeholder="Search" />
           </Item>
         </View>
 
-        {/*<View style={{flex: 1}}>
-            <Segment style={{backgroundColor: '#ef5777'}}>
-              <Button first>
-                <Icon name="ios-pizza" />
-              </Button>
-              <Button last>
-                <Icon name="ios-water" />
-              </Button>
-            </Segment>
-          </View>*/}
-
         <View style={styles.Body}>
           <View style={styles.ColProduct}>
-            <List style={{flex: 1}}>
+            <List style={{ flex: 1 }}>
               <FlatList
                 data={Data}
-                renderItem={({item}) => (
+                renderItem={({ item }) => (
                   <CardProduct
                     name={item.name}
                     image={'http://192.168.0.106:3333/' + item.image}
@@ -110,15 +89,16 @@ const Home = ({navigation}) => {
           <Button full>
             <Icon name="home" style={styles.IconColor} />
           </Button>
-          <Button full badge vertical>
-            <Badge style={{backgroundColor: '#ffc048'}}>
+          <Button
+            full
+            badge
+            vertical
+            onPress={() => navigation.navigate('Cart')}>
+            <Badge style={{ backgroundColor: '#ffc048' }}>
               <Text>2</Text>
             </Badge>
             <Icon name="ios-cart" style={styles.IconColor} />
           </Button>
-          {/*<Button full>
-            <Icon name="ios-trending-up" style={styles.IconColor} />
-          </Button>*/}
           <Button full onPress={() => navigation.navigate('Manage')}>
             <Icon name="ios-options" style={styles.IconColor} />
           </Button>
@@ -133,9 +113,9 @@ const CardProduct = props => {
     <Card style={styles.CardProduct}>
       <CardItem>
         <Body>
-          <Image style={styles.ImageProduct} source={{uri: props.image}} />
+          <Image style={styles.ImageProduct} source={{ uri: props.image }} />
         </Body>
-        <Body style={{flex: 1}}>
+        <Body style={{ flex: 1 }}>
           <Text
             style={{
               flex: 1,
@@ -145,7 +125,7 @@ const CardProduct = props => {
             }}>
             {props.name}
           </Text>
-          <Text style={{flex: 5, alignSelf: 'center', fontSize: 14}}>
+          <Text style={{ flex: 5, alignSelf: 'center', fontSize: 14 }}>
             {Rupiah.convert(props.price)}
           </Text>
           <Button
@@ -158,8 +138,8 @@ const CardProduct = props => {
               backgroundColor: '#0fbcf9',
               width: 100,
             }}>
-            <Icon name="ios-cart" style={{fontSize: 16}} />
-            <Text style={{fontSize: 8, marginLeft: -5}}>Add to Cart</Text>
+            <Icon name="ios-cart" style={{ fontSize: 16 }} />
+            <Text style={{ fontSize: 8, marginLeft: -5 }}>Add to Cart</Text>
           </Button>
         </Body>
       </CardItem>
