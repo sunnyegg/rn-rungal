@@ -33,7 +33,7 @@ const Login = ({ navigation }) => {
         },
       );
       if (loginResult.status === 200) {
-        AsyncStorage.setItem('keyToken', `Bearer ${loginResult.data.token}`);
+        AsyncStorage.setItem('keyToken', `Bearer: ${loginResult.data.token}`);
         ToastAndroid.show('Login Success!', ToastAndroid.SHORT)
         return navigation.navigate('Home');
       }
