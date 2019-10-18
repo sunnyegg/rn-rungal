@@ -7,9 +7,10 @@ import Home from './Screens/Home';
 import Profile from './Screens/Profile';
 import Manage from './Screens/Manage';
 import AddProduct from './Screens/AddProduct';
-import DeleteProduct from './Screens/DeleteProduct'
+import EditProduct from './Screens/EditProduct'
+import DeleteProduct from './Screens/DeleteProduct';
 import Cart from './Screens/Cart';
-import Revenue from './Screens/Revenue'
+import Revenue from './Screens/Revenue';
 
 const MainNavigator = createStackNavigator(
   {
@@ -18,14 +19,15 @@ const MainNavigator = createStackNavigator(
     Profile,
     Manage,
     AddProduct,
+    EditProduct,
     DeleteProduct,
     Cart,
-    Revenue
+    Revenue,
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Home',
-    transitionConfig: () => fromRight(300),
+    initialRouteName: 'Manage',
+    transitionConfig: () => fromRight(500),
   },
 );
 

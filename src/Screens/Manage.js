@@ -34,7 +34,7 @@ const Manage = ({ navigation }) => {
     )
     async function result() {
       await AsyncStorage.removeItem('keyToken');
-      return navigation.navigate('Login');
+      return navigation.replace('Login');
     }
   }
 
@@ -44,7 +44,7 @@ const Manage = ({ navigation }) => {
         androidStatusBarColor={'#ef5777'}
         style={{ backgroundColor: '#ef5777' }}>
         <Left>
-          <Button transparent onPress={() => navigation.goBack()}>
+          <Button transparent onPress={() => navigation.replace('Home')}>
             <Icon name="ios-arrow-back" />
           </Button>
         </Left>
@@ -71,28 +71,15 @@ const Manage = ({ navigation }) => {
                 <Icon name="ios-arrow-forward" />
               </Right>
             </ListItem>
-            <ListItem icon>
+            <ListItem icon onPress={() => navigation.navigate('DeleteProduct')}>
               <Left>
-                <Button style={{ backgroundColor: '#ffd32a' }}>
+                <Button
+                  style={{ backgroundColor: '#ffd32a' }}>
                   <Icon active name="ios-build" />
                 </Button>
               </Left>
               <Body>
-                <Text>Edit Product</Text>
-              </Body>
-              <Right>
-                <Icon name="ios-arrow-forward" />
-              </Right>
-            </ListItem>
-            <ListItem icon onPress={() => navigation.navigate('DeleteProduct')}>
-              <Left>
-                <Button
-                  style={{ backgroundColor: '#ff3f34' }}>
-                  <Icon active name="ios-trash" />
-                </Button>
-              </Left>
-              <Body>
-                <Text>Delete Product</Text>
+                <Text>Edit/Delete Product</Text>
               </Body>
               <Right>
                 <Icon name="ios-arrow-forward" />

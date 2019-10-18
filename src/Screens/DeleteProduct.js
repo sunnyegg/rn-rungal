@@ -3,8 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { getHome } from '../Public/Redux/Actions/Home';
 
-import { StyleSheet, View, Alert, ToastAndroid } from 'react-native';
-
+import { StyleSheet, View, Alert, ToastAndroid, AsyncStorage } from 'react-native';
 import {
   Header,
   Title,
@@ -18,8 +17,12 @@ import {
   ListItem,
   Thumbnail,
 } from 'native-base';
+
 import { FlatList } from 'react-native-gesture-handler';
 import Axios from 'axios';
+import Rupiah from 'rupiah-format'
+
+import EditProduct from './EditProduct';
 
 const DeleteProduct = ({ navigation }) => {
   const [Data, setData] = useState([]);
@@ -50,8 +53,12 @@ const DeleteProduct = ({ navigation }) => {
         text: 'OK', onPress: () => send(getID)
       }], { cancelable: false }
     )
-    const send = (id) => {
-      Axios.delete(`http://192.168.0.106:3333/api/v1/products/${id}`)
+    const send = async (id) => {
+      Axios.delete(`http://52.91.238.76:3000/api/v1/products/${id}`, {
+        headers: {
+          'Authorization': await AsyncStorage.getItem('keyToken')
+        }
+      })
       ToastAndroid.show('Deleted Successfully!', ToastAndroid.SHORT)
       getData()
     }
@@ -67,7 +74,7 @@ const DeleteProduct = ({ navigation }) => {
           </Button>
         </Left>
         <Body>
-          <Title>Delete Product</Title>
+          <Title>Edit/Delete Product</Title>
         </Body>
       </Header>
       <View style={{ flex: 1 }}>
@@ -77,17 +84,37 @@ const DeleteProduct = ({ navigation }) => {
             renderItem={({ item }) => (
               <ListItem thumbnail>
                 <Left>
-                  <Thumbnail square source={{ uri: 'http://192.168.0.106:3333/' + item.image }} />
+                  <Thumbnail square source={{ uri: 'http://52.91.238.76:3000/' + item.image }} />
                 </Left>
                 <Body style={{ flex: 1, flexDirection: 'row' }}>
                   <View style={{ flex: 4 }}>
                     <Text>{item.name}</Text>
                     <Text note numberOfLines={1}>
-                      {item.price}
+                      {Rupiah.convert(item.price)}
                     </Text>
                   </View>
                 </Body>
                 <Right>
+                  <Button
+                    onPress={() => navigation.navigate('EditProduct', {
+                      id: item.id,
+                      name: item.name,
+                      description: item.description,
+                      price: item.price,
+                      image: item.image,
+                      category: item.category,
+                      quantity: item.quantity
+                    })}
+                    style={{
+                      justifyContent: 'center',
+                      width: 50,
+                      backgroundColor: '#ffd32a'
+                    }}>
+                    <Icon style={{ fontSize: 24 }} name='ios-build' />
+                  </Button>
+                </Right>
+                <Right>
+
                   <Button
                     onPress={() => Delete(item.id, item.name)}
                     style={{

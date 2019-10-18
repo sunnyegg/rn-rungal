@@ -26,7 +26,7 @@ const Login = ({ navigation }) => {
   async function submitLogin() {
     try {
       const loginResult = await Axios.post(
-        'http://192.168.0.106:3333/api/v1/login',
+        'http://52.91.238.76:3000/api/v1/login',
         {
           user: Username,
           password: Password,
@@ -35,10 +35,9 @@ const Login = ({ navigation }) => {
       if (loginResult.status === 200) {
         AsyncStorage.setItem('keyToken', `Bearer: ${loginResult.data.token}`);
         ToastAndroid.show('Login Success!', ToastAndroid.SHORT)
-        return navigation.navigate('Home');
+        return navigation.replace('Home');
       }
     } catch (error) {
-      console.log(error);
       ToastAndroid.show('Login Failed! Username/Password is invalid!', ToastAndroid.SHORT)
     }
   }

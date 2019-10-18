@@ -11,7 +11,7 @@ export const getHome = (options) => {
       //   `http://100.24.15.0:3000/api/v1/products?sort=${sort}&order=${order}&search=${search}&page=${page}`
       // )
 
-      Axios.get(`http://192.168.0.106:3333/api/v1/products?search=${search}`, {
+      Axios.get(`http://52.91.238.76:3000/api/v1/products?search=${search}`, {
         headers: {
           Authorization: await AsyncStorage.getItem('keyToken'),
         },

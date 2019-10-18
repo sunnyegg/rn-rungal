@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 import { StyleSheet, View, ToastAndroid, AsyncStorage } from 'react-native';
@@ -23,13 +23,48 @@ import {
   Content,
 } from 'native-base';
 
-const AddProduct = ({ navigation }) => {
+const EditProduct = ({ navigation }) => {
   const [Name, setName] = useState('');
   const [Description, setDescription] = useState('');
   const [Quantity, setQuantity] = useState('');
   const [Price, setPrice] = useState('');
   const [Photo, setPhoto] = useState('');
   const [Selected2, setSelected2] = useState('');
+  const [CategoryID, setCategoryID] = useState('')
+
+  const [Category, setCategory] = useState([])
+
+  const priceInt = Price.toString()
+  const QtyInt = Quantity.toString()
+
+  async function getDataCategory() {
+    Axios.get('http://52.91.238.76:3000/api/v1/categories', {
+      headers: {
+        'Authorization': await AsyncStorage.getItem('keyToken')
+      }
+    })
+      .then(res => {
+        setCategory(res.data.data);
+
+      })
+      .catch(error => {
+        console.log(error);
+
+      })
+
+    setName(navigation.getParam('name'))
+    setDescription(navigation.getParam('description'))
+    setQuantity(navigation.getParam('quantity'))
+    setPrice(navigation.getParam('price'))
+    setPhoto(navigation.getParam('image'))
+    setSelected2(navigation.getParam('category'))
+    setCategoryID(navigation.getParam('id'))
+  }
+
+  useEffect(() => {
+    getDataCategory()
+  }, [])
+
 
   const FormCreate = (photo, data) => {
     const form = new FormData();
@@ -62,13 +97,9 @@ const AddProduct = ({ navigation }) => {
     });
   };
 
-  const handlePicker = value => {
-    setSelected2(value);
-  };
-
   async function SendData() {
 
-    Axios.post('http://52.91.238.76:3000/api/v1/products', FormCreate(Photo, {
+    Axios.put(`http://52.91.238.76:3000/api/v1/products/${CategoryID}`, FormCreate(Photo, {
       name: Name,
       description: Description,
       category: Selected2,
@@ -82,13 +113,13 @@ const AddProduct = ({ navigation }) => {
     })
       .then(res => {
         console.log(res);
-        ToastAndroid.show('Add Product Success!', ToastAndroid.SHORT);
+        ToastAndroid.show('Edit Product Success!', ToastAndroid.SHORT);
         navigation.navigate('Home')
 
       })
       .catch(error => {
         console.log(error);
-        ToastAndroid.show('Failed to Add Product!', ToastAndroid.SHORT);
+        ToastAndroid.show('Failed to Edit Product!', ToastAndroid.SHORT);
       })
   }
 
@@ -103,7 +134,7 @@ const AddProduct = ({ navigation }) => {
           </Button>
         </Left>
         <Body>
-          <Title>Add Product</Title>
+          <Title>Edit Product</Title>
         </Body>
       </Header>
       <View style={styles.Parent}>
@@ -135,13 +166,16 @@ const AddProduct = ({ navigation }) => {
                   <Label style={styles.Label}>Product Category</Label>
                   <Item picker rounded style={styles.FormItem}>
                     <Picker
-                      note
-                      mode="dropdown"
+                      mode="drohandlePickerhandlePickerpdown"
                       style={styles.InputInput}
                       selectedValue={Selected2}
-                      onValueChange={(value) => handlePicker(value)}>
-                      <Picker.Item label="Food" value="1" />
-                      <Picker.Item label="Beverages" value="2" />
+                      onValueChange={(value) => setSelected2(value)}>
+
+                      {Category.map((item) => {
+                        return (
+                          <Picker.Item label={item.name} value={item.id} />
+                        )
+                      })}
                     </Picker>
                   </Item>
                 </View>
@@ -152,7 +186,7 @@ const AddProduct = ({ navigation }) => {
                       keyboardType="numeric"
                       style={styles.InputInput}
                       onChangeText={text => setPrice(text)}
-                      value={Price}
+                      value={`${Price}`}
                     />
                   </Item>
                 </View>
@@ -160,10 +194,10 @@ const AddProduct = ({ navigation }) => {
                   <Label style={styles.Label}>Product Quantity</Label>
                   <Item rounded style={styles.FormItem}>
                     <Input
-                      keyboardType="numeric"
+                      keyboardType={'numeric'}
                       style={styles.InputInput}
                       onChangeText={text => setQuantity(text)}
-                      value={Quantity}
+                      value={`${Quantity}`}
                     />
                   </Item>
                 </View>
@@ -231,4 +265,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddProduct;
+export default EditProduct;

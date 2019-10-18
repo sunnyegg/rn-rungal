@@ -35,7 +35,6 @@ const Home = ({ navigation }) => {
 
   async function getData() {
     const output = await dispatch(getHome({ search: Search }));
-
     setData(output.value.data.data);
   }
 
@@ -50,10 +49,11 @@ const Home = ({ navigation }) => {
   return (
     <>
       <Header androidStatusBarColor={'#ef5777'} style={{ display: 'none' }} />
+
       <View style={styles.Parent}>
+
         <View style={{ flex: 1 }}>
           <Text style={styles.Title}>Rungal App</Text>
-
           <Item rounded style={styles.ItemSearch}>
             <Icon name="ios-search" style={{ margin: 5 }} />
             <Input placeholder="Search" onChange={value => setSearch(value)} onChangeText={text => setSearch(text)} value={Search} />
@@ -65,6 +65,7 @@ const Home = ({ navigation }) => {
             <Button first style={{ backgroundColor: 'red' }}><Text>Name</Text></Button>
             <Button last style={{ backgroundColor: 'blue' }}><Text>Price</Text></Button>
           </Segment>
+
           <View style={styles.ColProduct}>
             <List
               style={{ flex: 1, marginBottom: 40 }}>
@@ -73,7 +74,7 @@ const Home = ({ navigation }) => {
                 renderItem={({ item }) => (
                   <CardProduct
                     name={item.name}
-                    image={'http://192.168.0.106:3333/' + item.image}
+                    image={'http://52.91.238.76:3000/' + item.image}
                     price={item.price}
                     description={item.description}
                   />
@@ -82,8 +83,11 @@ const Home = ({ navigation }) => {
               />
             </List>
           </View>
+
         </View>
+
       </View>
+
       <Footer>
         <FooterTab style={styles.BottomNav}>
           <Button full onPress={() => getData()}>
@@ -99,7 +103,7 @@ const Home = ({ navigation }) => {
             </Badge>
             <Icon name="ios-cart" style={styles.IconColor} />
           </Button>
-          <Button full onPress={() => navigation.navigate('Manage')}>
+          <Button full onPress={() => navigation.replace('Manage')}>
             <Icon name="ios-options" style={styles.IconColor} />
           </Button>
         </FooterTab>
