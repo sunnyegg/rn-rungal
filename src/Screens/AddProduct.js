@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 import { StyleSheet, View, ToastAndroid, AsyncStorage } from 'react-native';
@@ -30,6 +30,28 @@ const AddProduct = ({ navigation }) => {
   const [Price, setPrice] = useState('');
   const [Photo, setPhoto] = useState('');
   const [Selected2, setSelected2] = useState('');
+
+  const [Category, setCategory] = useState([])
+
+  async function getDataCategory() {
+    Axios.get('http://52.91.238.76:3000/api/v1/categories', {
+      headers: {
+        'Authorization': await AsyncStorage.getItem('keyToken')
+      }
+    })
+      .then(res => {
+        setCategory(res.data.data);
+
+      })
+      .catch(error => {
+        console.log(error);
+
+      })
+  }
+
+  useEffect(() => {
+    getDataCategory()
+  }, [])
 
   const FormCreate = (photo, data) => {
     const form = new FormData();
@@ -135,13 +157,15 @@ const AddProduct = ({ navigation }) => {
                   <Label style={styles.Label}>Product Category</Label>
                   <Item picker rounded style={styles.FormItem}>
                     <Picker
-                      note
                       mode="dropdown"
                       style={styles.InputInput}
                       selectedValue={Selected2}
                       onValueChange={(value) => handlePicker(value)}>
-                      <Picker.Item label="Food" value="1" />
-                      <Picker.Item label="Beverages" value="2" />
+                      {Category.map((item) => {
+                        return (
+                          <Picker.Item label={item.name} value={item.id} />
+                        )
+                      })}
                     </Picker>
                   </Item>
                 </View>
