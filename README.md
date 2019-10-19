@@ -88,40 +88,22 @@ $ npm start
 
 ### Login Page
 
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Login.png)
 
 ### Home Page
 
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Home.png)
 
 ### Add to Cart
 
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Add%20to%20Cart.png)
-
 ### Checkout
-
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Checkout.png)
 
 ### Add Product
 
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Add%20product.png)
-
 ### Edit Product
-
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Edit%20product.png)
 
 ### Delete Product
 
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Delete%20product.png)
-
 ### Card Revenue Information
-
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Card.png)
 
 ### Chart Revenue
 
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/Chart.png)
-
 ### History Order
-
-![](https://raw.githubusercontent.com/sunnyegg/react-rungalapp-bootstrap/master/screenshots/History%20order.png)
