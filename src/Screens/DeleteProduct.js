@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-
 import { getHome } from '../Public/Redux/Actions/Home';
+import { API_BASEURL } from 'react-native-dotenv'
 
 import { StyleSheet, View, Alert, ToastAndroid, AsyncStorage } from 'react-native';
 import {
@@ -21,8 +21,6 @@ import {
 import { FlatList } from 'react-native-gesture-handler';
 import Axios from 'axios';
 import Rupiah from 'rupiah-format'
-
-import EditProduct from './EditProduct';
 
 const DeleteProduct = ({ navigation }) => {
   const [Data, setData] = useState([]);
@@ -54,7 +52,7 @@ const DeleteProduct = ({ navigation }) => {
       }], { cancelable: false }
     )
     const send = async (id) => {
-      Axios.delete(`http://52.91.238.76:3000/api/v1/products/${id}`, {
+      Axios.delete(`${API_BASEURL}/api/v1/products/${id}`, {
         headers: {
           'Authorization': await AsyncStorage.getItem('keyToken')
         }
@@ -84,7 +82,7 @@ const DeleteProduct = ({ navigation }) => {
             renderItem={({ item }) => (
               <ListItem thumbnail>
                 <Left>
-                  <Thumbnail square source={{ uri: 'http://52.91.238.76:3000/' + item.image }} />
+                  <Thumbnail square source={{ uri: `${API_BASEURL}/${item.image}` }} />
                 </Left>
                 <Body style={{ flex: 1, flexDirection: 'row' }}>
                   <View style={{ flex: 4 }}>

@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import { AsyncStorage } from 'react-native';
+import { API_BASEURL } from 'react-native-dotenv'
 
 export const getHome = (options) => {
   return {
@@ -7,11 +8,7 @@ export const getHome = (options) => {
     payload: new Promise(async (resolve, reject) => {
       const { search = "", sort = "", page = "1", order = "" } = options;
 
-      // Axios.get(
-      //   `http://100.24.15.0:3000/api/v1/products?sort=${sort}&order=${order}&search=${search}&page=${page}`
-      // )
-
-      Axios.get(`http://52.91.238.76:3000/api/v1/products?search=${search}`, {
+      Axios.get(`${API_BASEURL}/api/v1/products?search=${search}`, {
         headers: {
           Authorization: await AsyncStorage.getItem('keyToken'),
         },

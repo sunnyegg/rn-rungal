@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getHome } from '../Public/Redux/Actions/Home';
-
 import Rupiah from 'rupiah-format';
+import { API_BASEURL } from 'react-native-dotenv'
 
 
 import { StyleSheet, Image, View, FlatList } from 'react-native';
@@ -74,7 +74,7 @@ const Home = ({ navigation }) => {
                 renderItem={({ item }) => (
                   <CardProduct
                     name={item.name}
-                    image={'http://52.91.238.76:3000/' + item.image}
+                    image={`${API_BASEURL}/${item.image}`}
                     price={item.price}
                     description={item.description}
                   />

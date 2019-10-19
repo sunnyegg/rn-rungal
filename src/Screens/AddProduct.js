@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import { API_BASEURL } from 'react-native-dotenv'
 
 import { StyleSheet, View, ToastAndroid, AsyncStorage } from 'react-native';
 
@@ -34,7 +35,7 @@ const AddProduct = ({ navigation }) => {
   const [Category, setCategory] = useState([])
 
   async function getDataCategory() {
-    Axios.get('http://52.91.238.76:3000/api/v1/categories', {
+    Axios.get(`${API_BASEURL}/api/v1/categories`, {
       headers: {
         'Authorization': await AsyncStorage.getItem('keyToken')
       }
@@ -90,7 +91,7 @@ const AddProduct = ({ navigation }) => {
 
   async function SendData() {
 
-    Axios.post('http://52.91.238.76:3000/api/v1/products', FormCreate(Photo, {
+    Axios.post(`${API_BASEURL}/api/v1/products`, FormCreate(Photo, {
       name: Name,
       description: Description,
       category: Selected2,

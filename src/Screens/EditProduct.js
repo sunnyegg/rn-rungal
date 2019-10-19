@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-
 import { StyleSheet, View, ToastAndroid, AsyncStorage } from 'react-native';
-
+import {API_BASEURL} from 'react-native-dotenv'
 import ImagePicker from 'react-native-image-picker';
 
 import {
@@ -38,7 +37,7 @@ const EditProduct = ({ navigation }) => {
   const QtyInt = Quantity.toString()
 
   async function getDataCategory() {
-    Axios.get('http://52.91.238.76:3000/api/v1/categories', {
+    Axios.get(`${API_BASEURL}/api/v1/categories`, {
       headers: {
         'Authorization': await AsyncStorage.getItem('keyToken')
       }
@@ -99,7 +98,7 @@ const EditProduct = ({ navigation }) => {
 
   async function SendData() {
 
-    Axios.put(`http://52.91.238.76:3000/api/v1/products/${CategoryID}`, FormCreate(Photo, {
+    Axios.put(`${API_BASEURL}/api/v1/products/${CategoryID}`, FormCreate(Photo, {
       name: Name,
       description: Description,
       category: Selected2,

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+
+import { API_BASEURL } from 'react-native-dotenv'
 
 import {
   StyleSheet,
@@ -26,7 +28,7 @@ const Login = ({ navigation }) => {
   async function submitLogin() {
     try {
       const loginResult = await Axios.post(
-        'http://52.91.238.76:3000/api/v1/login',
+        API_BASEURL + '/api/v1/login',
         {
           user: Username,
           password: Password,

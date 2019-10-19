@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Alert, Dimensions} from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Alert, Dimensions } from 'react-native';
 import Axios from 'axios';
 import Rupiah from 'rupiah-format';
+import { API_BASEURL } from 'react-native-dotenv'
 
-import {LineChart} from 'react-native-chart-kit';
+import { LineChart } from 'react-native-chart-kit';
 
 import {
   Header,
@@ -20,7 +20,7 @@ import {
   CardItem,
 } from 'native-base';
 
-const Revenue = ({navigation}) => {
+const Revenue = ({ navigation }) => {
   const [DailyIncome, setDailyIncome] = useState([]);
   const [WeeklyIncome, setWeeklyIncome] = useState([]);
   const [MonthlyIncome, setMonthlyIncome] = useState([]);
@@ -28,7 +28,7 @@ const Revenue = ({navigation}) => {
   const [Data, setData] = useState({});
 
   function getDailyIncome() {
-    Axios.get('http://52.91.238.76:3000/api/v1/history/daily')
+    Axios.get(`${API_BASEURL}/api/v1/history/daily`)
       .then(result => {
         setDailyIncome(result.data.data);
       })
@@ -38,7 +38,7 @@ const Revenue = ({navigation}) => {
   }
 
   function getWeeklyIncome() {
-    Axios.get('http://52.91.238.76:3000/api/v1/history/weekly')
+    Axios.get(`${API_BASEURL}/api/v1/history/weekly`)
       .then(result => {
         setWeeklyIncome(result.data.data);
       })
@@ -48,7 +48,7 @@ const Revenue = ({navigation}) => {
   }
 
   function getMonthlyIncome() {
-    Axios.get('http://52.91.238.76:3000/api/v1/history/monthly')
+    Axios.get(`${API_BASEURL}/api/v1/history/monthly`)
       .then(result => {
         setMonthlyIncome(result.data.data);
       })
@@ -58,7 +58,7 @@ const Revenue = ({navigation}) => {
   }
 
   function getYearlyIncome() {
-    Axios.get('http://52.91.238.76:3000/api/v1/history/yearly')
+    Axios.get(`${API_BASEURL}/api/v1/history/yearly`)
       .then(result => {
         setYearlyIncome(result.data.data);
       })
@@ -92,7 +92,7 @@ const Revenue = ({navigation}) => {
     <>
       <Header
         androidStatusBarColor={'#ef5777'}
-        style={{backgroundColor: '#ef5777'}}>
+        style={{ backgroundColor: '#ef5777' }}>
         <Left>
           <Button transparent onPress={() => navigation.goBack()}>
             <Icon name="ios-arrow-back" />
@@ -103,7 +103,7 @@ const Revenue = ({navigation}) => {
         </Body>
       </Header>
       <Content>
-        <View style={{flex: 1, padding: 20, alignItems: 'center'}}>
+        <View style={{ flex: 1, padding: 20, alignItems: 'center' }}>
           <View>
             <LineChart
               data={{
@@ -149,22 +149,22 @@ const Revenue = ({navigation}) => {
             />
           </View>
         </View>
-        <View style={{flex: 1}}>
-          <View style={{flex: 1, flexDirection: 'row', padding: 10}}>
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, flexDirection: 'row', padding: 10 }}>
             <Card style={styles.CardRevenue}>
               <CardItem
-                style={{flex: 1, flexWrap: 'wrap', backgroundColor: '#05c46b'}}>
+                style={{ flex: 1, flexWrap: 'wrap', backgroundColor: '#05c46b' }}>
                 <Body>
-                  <Text style={{color: 'white'}}>Today's Income</Text>
+                  <Text style={{ color: 'white' }}>Today's Income</Text>
                   <Text
-                    style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                    style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
                     {Rupiah.convert(daily[daily.length - 1])}
                   </Text>
-                  <Text style={{color: 'white'}}>
+                  <Text style={{ color: 'white' }}>
                     {Math.round(
                       ((daily[daily.length - 1] - daily[daily.length - 2]) /
                         daily[daily.length - 2]) *
-                        100,
+                      100,
                     )}
                     % Yesterday
                   </Text>
@@ -173,18 +173,18 @@ const Revenue = ({navigation}) => {
             </Card>
             <Card style={styles.CardRevenue}>
               <CardItem
-                style={{flex: 1, flexWrap: 'wrap', backgroundColor: '#4bcffa'}}>
+                style={{ flex: 1, flexWrap: 'wrap', backgroundColor: '#4bcffa' }}>
                 <Body>
-                  <Text style={{color: 'white'}}>Today's Orders</Text>
+                  <Text style={{ color: 'white' }}>Today's Orders</Text>
                   <Text
-                    style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                    style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>
                     {order[order.length - 1]}
                   </Text>
-                  <Text style={{color: 'white'}}>
+                  <Text style={{ color: 'white' }}>
                     {Math.round(
                       ((order[order.length - 1] - order[order.length - 2]) /
                         order[order.length - 2]) *
-                        100,
+                      100,
                     )}
                     % Yesterday
                   </Text>
@@ -192,21 +192,21 @@ const Revenue = ({navigation}) => {
               </CardItem>
             </Card>
           </View>
-          <View style={{flex: 1, padding: 10}}>
+          <View style={{ flex: 1, padding: 10 }}>
             <Card style={styles.CardRevenue}>
               <CardItem
-                style={{flex: 1, flexWrap: 'wrap', backgroundColor: '#ffa801'}}>
-                <Body style={{justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={{color: 'white'}}>This Year's Income</Text>
+                style={{ flex: 1, flexWrap: 'wrap', backgroundColor: '#ffa801' }}>
+                <Body style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ color: 'white' }}>This Year's Income</Text>
                   <Text
-                    style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>
+                    style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
                     {Rupiah.convert(year[year.length - 1])}
                   </Text>
-                  <Text style={{color: 'white'}}>
+                  <Text style={{ color: 'white' }}>
                     {Math.round(
                       ((year[year.length - 1] - year[year.length - 2]) /
                         year[year.length - 2]) *
-                        100,
+                      100,
                     )}
                     % Last Year
                   </Text>
