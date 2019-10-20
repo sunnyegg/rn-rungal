@@ -64,7 +64,6 @@ $ npm start
 - [React Native Image Picker](https://github.com/react-native-community/react-native-image-picker)
 - [Redux-Logger](https://www.npmjs.com/package/redux-logger)
 - [Redux-Promise-Middleware](https://www.npmjs.com/package/redux-promise-middleware)
-- [Rupiah-Format](https://www.npmjs.com/package/rupiah-format)
 
 ---
 
@@ -88,22 +87,32 @@ $ npm start
 
 ### Login Page
 
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553373846.jpg?raw=true)
 
 ### Home Page
 
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553671506.jpg?raw=true)
 
-### Add to Cart
+### Add to Cart / Checkout
 
-### Checkout
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553680937.jpg?raw=true)
+
+### Manage Screen
+
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553688859.jpg?raw=true)
 
 ### Add Product
 
-### Edit Product
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553702239.jpg?raw=true)
 
-### Delete Product
+### Edit/Delete Product
 
-### Card Revenue Information
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553712180.jpg?raw=true)
 
-### Chart Revenue
+### Revenue Screen
+
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553730648.jpg?raw=true)
 
 ### History Order
+
+![](https://github.com/sunnyegg/rn-rungal/blob/master/screenshots/screenshot-1571553739058.jpg?raw=true)
