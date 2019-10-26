@@ -3,7 +3,9 @@
 
 # React Native Rungal
 
-<!-- [rungal-app-surge.sh](http://rungal-app.surge.sh) -->
+Link to APK: [Link](https://drive.google.com/open?id=150ZgYDxnO3O1G9ya8bKoKbgNZnWvIXCw)
+
+Contact me @ adilatresna21@gmail.com 
 
 ---
 
