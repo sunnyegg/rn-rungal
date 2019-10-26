@@ -28,10 +28,12 @@ Rungal is a point of sales application of restaurant. The main use of this appli
 
 ## Prerequisite
 
-- [Node.js](https://nodejs.org/en/)
-- [React.js](https://facebook.github.io/react-native/)
-- [Redux](https://react-redux.js.org/)
-- [NativeBase](https://nativebase.io/)
+| **Main Dependencies** | **Description** | **Link** |
+| --- | --- | --- |
+| **Node.js** | A Javascript runtime. | [Go](https://nodejs.org/en/)
+| **React Native** | A Javascript framework for building Android/iOS application. | [Go](https://facebook.github.io/react-native/)
+| **Redux** | A Javascript library for state management. | [Go](https://redux.js.org/)
+| **NativeBase** | A UI components for React Native. | [Go](https://nativebase.io/)
 
 ---
 
@@ -57,13 +59,16 @@ $ npm start
 
 ## Other Dependencies
 
-- [Axios](https://www.npmjs.com/package/axios)
-- [AsyncStorage](https://facebook.github.io/react-native/docs/asyncstorage)
-- [React Navigation](https://reactnavigation.org/)
-- [React Native Chart Kit](https://www.npmjs.com/package/react-native-chart-kit)
-- [React Native Image Picker](https://github.com/react-native-community/react-native-image-picker)
-- [Redux-Logger](https://www.npmjs.com/package/redux-logger)
-- [Redux-Promise-Middleware](https://www.npmjs.com/package/redux-promise-middleware)
+
+| **Other Dependencies** | **Description** | **Link** |
+| --- | --- | --- |
+| **Axios** | A promise-based HTTP client. | [Go](https://github.com/axios/axios)
+| **Async Storage** | A local storage system that is global to the app. | [Go](https://github.com/react-native-community/async-storage)
+| **React Navigation** | For navigation and routing. | [Go](https://reactnavigation.org)
+| **React Native Chart Kit** | A package for drawing chart in React Native. | [Go](https://www.npmjs.com/package/react-native-chart-kit)
+| **React Native Image Picker** | A package for uploading image file in React Native. | [Go](https://github.com/react-native-community/react-native-image-picker)
+| **Redux-Logger** | A Redux logging tool. | [Go](https://github.com/LogRocket/redux-logger)
+| **Redux-Promise-Middleware** | A package for handling async action in Redux. | [Go](https://www.npmjs.com/package/redux-promise-middleware)
 
 ---
 

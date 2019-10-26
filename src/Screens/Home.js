@@ -61,10 +61,10 @@ const Home = ({ navigation }) => {
         </View>
 
         <View style={styles.Body}>
-          <Segment style={{ backgroundColor: 'transparent' }}>
+          {/* <Segment style={{ backgroundColor: 'transparent' }}>
             <Button first style={{ backgroundColor: 'red' }}><Text>Name</Text></Button>
             <Button last style={{ backgroundColor: 'blue' }}><Text>Price</Text></Button>
-          </Segment>
+          </Segment> */}
 
           <View style={styles.ColProduct}>
             <List
